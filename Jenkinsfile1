@@ -47,9 +47,11 @@ pipeline {
   
       stage("Deploy") {
              steps{ 
- 
-               echo "Change REquest Creation step" 
+
+
+               echo "i am in the Scratch/Test1 branch" 
                snDevOpsChange()
+
                   echo ">> Deploy in prod"
               }
       }      
