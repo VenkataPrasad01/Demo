@@ -1,3 +1,12 @@
+def artifactname = "devops-snow-build-app.jar"
+def repoName = "JenkinsDevOpsProject"
+def pipelineName = "SunilPipelines/Sunil-Scripted-Pipeline-Sonar"
+def semanticVersion = "${env.BUILD_NUMBER}.0.0"
+def packageName = "devops-snow-build-prasad_pkg_${env.BUILD_NUMBER}"
+def version = "${env.BUILD_NUMBER}.0"
+def pkgName = "devops-snow-build-prasad_pkg_${env.BUILD_NUMBER}"
+
+
 pipeline {
    agent any
    tools {
@@ -29,30 +38,8 @@ pipeline {
               echo "Creating artifact"
               sh 'mvn package'
               sleep 3
-              snDevOpsArtifact(artifactsPayload:"""
-               {"artifacts": 
-                  [
-                     {
-                        "name": "avgbrewingapp-mvp3.jar",
-                        "version":"0.${env.BUILD_NUMBER}.0",
-                        "semanticVersion": "0.${env.BUILD_NUMBER}.0",
-                        "repositoryName": "bm-artifacts-repo"
-                       }
-                    ]
-                 }""")
-               snDevOpsPackage(name: "avgbrewingapp", artifactsPayload: """
-              {"artifacts": 
-               [
-                  {
-                     "name": "avgbrewingapp-mvp3.jar",
-                     "repositoryName": "bm-artifacts-repo",
-                     "pipelineName": "Average App Pipeline",
-                     "taskExecutionNumber":"${env.BUILD_NUMBER}",
-                     "stageName":"Create Artifact for prod",
-                     "branchName": "master"
-                   }
-                 ]
-                }""")   
+             snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"Scratch/test2"}""")
+              snDevOpsPackage(name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"Scratch/test2"}""")  
                 
            }
         }
@@ -61,8 +48,8 @@ pipeline {
       stage("Deploy") {
              steps{ 
  
-                
-              // snDevOpsChange()
+               echo "Change REquest Creation step" 
+               snDevOpsChange()
                   echo ">> Deploy in prod"
               }
       }      
