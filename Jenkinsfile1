@@ -39,7 +39,7 @@ pipeline {
                  steps {
                     
 
-		    snDevOpsChange(ignoreErrors:false)
+		    snDevOpsChange(ignoreErrors:true)
                     
                  }
       }
