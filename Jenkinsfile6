@@ -46,7 +46,18 @@ pipeline {
                  }
       }
 
-
+   stage("Sample") {
+             steps{
+                  echo "Sample1"
+                  
+              }
+      }  
+   stage("Sample2") {
+             steps{
+                  echo "Sample1"
+                  
+              }
+      }  
  }
  
 }
