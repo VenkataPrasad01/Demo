@@ -25,15 +25,15 @@ environment {
        stage('Test') {
            steps {
               
-              sh 'mvn test'
-	       echo 'Deploying the change....'
+             // sh 'mvn test'
+	      // echo 'Deploying the change....'
 		   // sonarSummaries()
-		echo  "Branch Name is : ${env.BRANCH_NAME}"
-		echo  "Branch Name GIT BRANCH is : ${env.GIT_BRANCH}"
+		//echo  "Branch Name is : ${env.BRANCH_NAME}"
+		//echo  "Branch Name GIT BRANCH is : ${env.GIT_BRANCH}"
                   // snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"venkata2"}""")
            	   // snDevOpsPackage(name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}],"branchName":"venkata2"}""")
-		snDevOpsArtifact artifactsPayload: '{"artifacts":[{"name": "sa-web.jar", "version": "1.9", "repositoryName": "services-1031"}, {"name": "sa-db.jar", "version": "1.3.2", "repositoryName": "services-1032"}], "branchName": "venkata2"}'
-		snDevOpsPackage artifactsPayload: '{"artifacts":[{"name": "sa-web.jar", "version": "1.9", "repositoryName": "services-1031"}, {"name": "sa-db.jar", "version": "1.3.2", "repositoryName": "services-1032"}], "branchName": "venkata2"}', name: 'packageName'
+		snDevOpsArtifact artifactsPayload: '{"artifacts":[{"name": "sa-web.jar", "version": "1.101", "repositoryName": "services-1031"}, {"name": "sa-db.jar", "version": "1.3.2", "repositoryName": "services-1032"}], "branchName": "venkata2"}'
+		snDevOpsPackage artifactsPayload: '{"artifacts":[{"name": "sa-web.jar", "version": "1.101", "repositoryName": "services-1031"}, {"name": "sa-db.jar", "version": "1.3.2", "repositoryName": "services-1032"}], "branchName": "venkata2"}', name: 'packageName'
            }
            post {
              always {
