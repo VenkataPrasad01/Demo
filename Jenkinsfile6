@@ -56,23 +56,6 @@ environment {
                   
               }
       }  
-   stage("Sample2") {
-             steps{
-	
-              
-               sh 'mvn test'
-		echo "Sample1"
-		sleep 10
-}
- post {
-             always {
-                junit "**/target/surefire-reports/*.xml"
-             }
-           }
-
-                  
-		 
-                  }
        
  }
  
