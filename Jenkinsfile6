@@ -8,9 +8,7 @@ def pkgName = "devops-snow-build-Prasad_pkg_${env.BUILD_NUMBER}"
 
 pipeline {
   agent any
-  tools {
-       maven 'Maven'
-   }
+
    environment {
 	 SCANNER_HOME = tool 'sonarScanner'
 	}  
