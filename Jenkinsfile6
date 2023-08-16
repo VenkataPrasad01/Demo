@@ -58,7 +58,7 @@ environment {
       }  
    stage("Sample2") {
              steps{
-	 steps {
+	
               
                sh 'mvn test'
 		echo "Sample1"
@@ -73,7 +73,7 @@ environment {
                   
 		 
                   }
-      }  
+       
  }
  
 }
