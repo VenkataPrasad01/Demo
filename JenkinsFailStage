@@ -33,6 +33,13 @@ environment {
                 snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}]}""")
            	snDevOpsPackage(name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}]}""")
            }
+	 post {
+             always {
+                junit "**/target/surefire-reports/*.xml"
+             }
+           }
+
+	
        }
       stage('Deploy') {
                  steps {
