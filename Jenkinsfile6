@@ -49,14 +49,6 @@ environment {
                     
                  }
       }
-
-   stage("Sample") {
-             steps{
-                  echo "Sample1"
-                  
-              }
-      }  
-       
  }
  
 }
