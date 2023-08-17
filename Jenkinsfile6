@@ -57,10 +57,7 @@ environment {
       }  
    stage("Sample2") {
              steps{
-
-            script {
-                        error "This pipeline stops here!"
-                  }
+ echo "Sample1"
                   }
       }  
  }
