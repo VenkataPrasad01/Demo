@@ -27,7 +27,7 @@ environment {
               
                sh 'mvn test'
 	       echo 'Deploying the change....'
-		 sonarSummaries()
+		
 		echo  "Branch Name is : ${env.BRANCH_NAME}"
 		echo  "Branch Name GIT BRANCH is : ${env.GIT_BRANCH}"
                 snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}]}""")
