@@ -1,10 +1,10 @@
-def artifactname = "devops-snow-build-app.jar"
+def artifactname = "devops-snow-build-app.jar1"
 def repoName = "JenkinsDevOpsProject"
 def pipelineName = "SunilPipelines/Sunil-Scripted-Pipeline-Sonar"
 def semanticVersion = "${env.BUILD_NUMBER}.0.0"
 def packageName = "devops-snow-build-prasad_pkg_${env.BUILD_NUMBER}"
 def version = "${env.BUILD_NUMBER}.0"
-def pkgName = "devops-snow-build-prasad_pkg_${env.BUILD_NUMBER}"
+def pkgName = "devops-snow-build-prasad_pkg1_${env.BUILD_NUMBER}"
 
 pipeline {
   agent any
@@ -25,9 +25,9 @@ pipeline {
               
               sh 'mvn test'
 	    
-	      //sonarSummaries()
-              snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"master"}""")
-              snDevOpsPackage(name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"master"}""")
+	     
+              snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"${env.BRANCH_NAME}"}""")
+              snDevOpsPackage(name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"${env.BRANCH_NAME}"}""")
            }
            post {
              always {
@@ -40,7 +40,7 @@ pipeline {
                     
 
 		    snDevOpsChange(ignoreErrors:false)
-                    
+                    sonarSummaries()
                  }
       }
 
@@ -57,9 +57,11 @@ def sonarSummaries() {
    
 	//}
 	
-  // withSonarQubeEnv('sonarQube_local') {
+   withSonarQubeEnv('sonarQube_local') {
 
-       	sh '${SCANNER_HOME}/bin/sonar-scanner -Dproject.settings=${SCANNER_HOME}/conf/qa-sonar-scanner.properties'
+
+         sh '${SCANNER_HOME}/bin/sonar-scanner -Dproject.settings=${SCANNER_HOME}/conf/qa-sonar-scanner.properties'
+
    		// sh '${SCANNER_HOME}/bin/sonar-scanner -Dproject.settings=${SCANNER_HOME}/conf/sonar-scanner.properties'
 	//}
 	
