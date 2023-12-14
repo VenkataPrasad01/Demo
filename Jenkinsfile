@@ -26,7 +26,7 @@ pipeline {
         stage('TestStage') {
             steps {
                 echo 'Running test stage'
-	        sonarSummaries()
+	       // sonarSummaries()
             }
         }
         stage('Deploy') {
@@ -34,7 +34,7 @@ pipeline {
 		script{
 		//sh 'mvn -B package --file pom.xml'    
                 echo 'Running deploy stage' 
-	      //  snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode','applicationName': 'PetStoreAPI-Github','securityToolId' : '15c19e6a87f1b1504a4577b8cebb3505'}"
+	        snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode','applicationName': 'PetStoreAPI-Github','securityToolId' : '538303f147cb391008d3b132736d4336'}"
 		//snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Checkmarx One", "projectName": "DemoProject", "projectId": "75acb348-c054-4ab3-807d-e17e92a923ab", "scanId": "2bb9e016-3669-488c-8341-ffa4831221f3", "securityToolId": "8bfd09b8c3253110b31ff42c05013181"}'
 		//  snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Checkmarx SAST", "projectId": "1076", "securityToolId": "43acfbfbc339b110b31ff42c050131c6"}'
 		// veracode applicationName: "PetStoreAPI-Github", criticality: 'VeryHigh', debug: true, timeout: 20, fileNamePattern: '', pHost: '', pPassword: '', pUser: '', replacementPattern: '', sandboxName: '', scanExcludesPattern: '', scanIncludesPattern: '', scanName: "${BUILD_TAG}", uploadExcludesPattern: '', uploadIncludesPattern: 'target/DemoMavenProject*', vid: "5a57339d6779ffb76782e03df3f6e9d1", vkey: "f31d151c427a3286469a6291b14dee15e7f553e066b32c801f09014dc3282de4f51a81cd0bde7c7dd9d95de9a71a32c8a2c582158f278320ae765fe9fd232e0a", waitForScan : true
