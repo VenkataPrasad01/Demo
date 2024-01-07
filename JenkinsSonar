@@ -53,8 +53,8 @@ pipeline {
          steps {
                       
                       echo "packageName - ${packageName}" 
-		      //snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode','applicationName': 'PetStoreAPI-Github', 'securityToolId' : 'b866c7429398311065edfca86cba104c'}" //'securityToolId' : '05bf3d33c32f2110cd4cf92f0501311b'}"	
-		        snDevOpsChange changeRequestDetails: '{ "attributes": {"chg_model": "e55d0bfec343101035ae3f52c1d3ae49","template": "5b741719939ff110271afefd1dba10f2"}}'
+		      snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode','applicationName': 'PetStoreAPI-Github', 'securityToolId' : '8462c9c6c32f351027b51185e001311c'}" //'securityToolId' : '05bf3d33c32f2110cd4cf92f0501311b'}"	
+		        //snDevOpsChange changeRequestDetails: '{ "attributes": {"chg_model": "e55d0bfec343101035ae3f52c1d3ae49","template": "5b741719939ff110271afefd1dba10f2"}}'
 			//snDevOpsChange changeRequestDetails: '{ "attributes": {"type": "standard","standard_change_template": "b1c8d15147810200e90d87e8dee490f7"}}'
 			
                       }
