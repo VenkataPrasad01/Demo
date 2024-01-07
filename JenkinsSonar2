@@ -49,7 +49,7 @@ pipeline {
 		     echo "${changeRequestNumber}"
 		     snDevOpsUpdateChangeInfo(changeRequestDetails: """{"close_code": "successful", "state": "3", "close_notes": "Deployment to PROD was successful test 123", "short_description": "Test description in Get_Change Step by", "priority": "1", "justification": "test justification", "description": "test description",  "cab_required": true, "comments": "This update for work notes is from jenkins file", "work_notes": "Update of change request through Update API"}""", changeRequestNumber: """${changeRequestNumber}""")
                   
-                  
+          }        
       }
    }
    def sonarSummaries() {
