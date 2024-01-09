@@ -101,8 +101,8 @@ stage('Update_Change') {
                 }
             }
         }
-  }
-}
+  
+
  def sonarSummaries() {
 	withSonarQubeEnv('sonarcloud.io'){
 	   if(fileExists("sonar-project.properties")) {
