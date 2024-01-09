@@ -101,6 +101,7 @@ stage('Update_Change') {
                 }
             }
         }
+  }
 }
  def sonarSummaries() {
 	withSonarQubeEnv('sonarcloud.io'){
