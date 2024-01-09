@@ -71,7 +71,6 @@ stage('Deploy') {
 		//changeRequestNumber = snDevOpsGetChangeNumber(changeDetails: """{"stage_name":"${stageName}"}""")
 		 changeRequestNumber = snDevOpsGetChangeNumber changeDetails: """{ "pipeline_name": "Riya_Scripted2", "build_number": "${buildNo}", "stage_name": "Deploy", "branch_name": "master"}"""
 		echo "${changeRequestNumber}"
-		//snDevOpsUpdateChangeInfo(changeRequestDetails: """{"close_code": "successful", "state": "3", "close_notes": "Deployment to PROD was successful test 123", "short_description": "Test description in Get_Change Step by", "priority": "1", "justification": "test justification", "description": "test description",  "cab_required": true, "comments": "This update for work notes is from jenkins file", "work_notes": "Update of change request through Update API"}""", changeRequestNumber: """${changeRequestNumber}""")
 		snDevOpsUpdateChangeInfo(changeRequestDetails: 
                         """{
                             "short_description": "Short description updated to Test description in ${currStageName} Step by ${env.BUILD_NUMBER}",
