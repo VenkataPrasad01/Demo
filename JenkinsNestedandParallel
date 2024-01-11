@@ -107,7 +107,7 @@ pipeline {
 						stage("Deploy2") {
 							steps {
 								echo 'CR2'
-								sleep 10
+								//sleep 10
 								//snDevOpsChange()
 							}
 						}
