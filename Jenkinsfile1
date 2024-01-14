@@ -8,23 +8,19 @@ def pkgName = "devops-snow-build-prasad1_pkg_${env.BUILD_NUMBER}"
 def buildNo ="${env.BUILD_NUMBER}"
 
 pipeline {
-  agent any
-  tools {
-       maven 'Maven'
-   }
- 
-  stages {
-       stage('Build') {
-           steps {
-              
-              sh 'mvn -B -DskipTests clean compile'
 
-           }
+   agent any
+ 
+   stages {
+       stage("Build") {
+                steps {
+                    echo "Building" 
+                  
+                }
        }
-       stage('Test') {
+        stage("Test") {
+
            steps {
-              
-              sh 'mvn test'
 	    
 	      sonarSummaries2()
               snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"PR-13"}""")

@@ -39,8 +39,7 @@ pipeline {
        }
       stage('Deploy') {
                  steps {
-                    
-                   
+
 		    snDevOpsChange(ignoreErrors:false)
                     
                  }
