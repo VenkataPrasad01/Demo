@@ -21,11 +21,11 @@ pipeline {
 						echo "build 1.1 executed"
 						sh 'mvn clean'
 						sleep 10
-						//snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"main"}""")
+						snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"main"}""")
 				          sleep 5
-					  	//snDevOpsPackage(name: "${packageName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"main"}""")
+					  	snDevOpsPackage(name: "${packageName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"main"}""")
 						sleep 20
-						//snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode","applicationName": "PetStoreAPI-Github", "securityToolId" : "23d90e459790b5102bf172c71153afdf"}'
+						snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode","applicationName": "PetStoreAPI-Github"}'
 						//sonarSummaries()
 						snDevOpsChange()
 						
@@ -61,8 +61,8 @@ pipeline {
 							steps {
 								echo 'CR1'
 								sleep 10
-								//snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"main"}""")
-								//snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode","applicationName": "PetStoreAPI-Github", "securityToolId" : "23d90e459790b5102bf172c71153afdf"}'
+								snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"main"}""")
+								snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode","applicationName": "PetStoreAPI-Github"}'
 								snDevOpsChange(changeRequestDetails: """
 								  {
 								    "setCloseCode": false,
