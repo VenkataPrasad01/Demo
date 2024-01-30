@@ -26,7 +26,7 @@ pipeline {
 					  	//snDevOpsPackage(name: "${packageName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"main"}""")
 						sleep 20
 						//snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode","applicationName": "PetStoreAPI-Github", "securityToolId" : "23d90e459790b5102bf172c71153afdf"}'
-						sonarSummaries()
+						//sonarSummaries()
 						snDevOpsChange()
 						
 					}
@@ -93,7 +93,7 @@ pipeline {
 								sleep 5
 								//junit "**/target/surefire-reports/*.xml"
 								sleep 15
-								sonarSummaries()
+								//sonarSummaries()
 							        snDevOpsChange()
 								
 							}
