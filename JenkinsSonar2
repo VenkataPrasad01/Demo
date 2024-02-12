@@ -29,7 +29,7 @@ pipeline {
        stage('Test') {
            steps {
               sonarSummaries()
-	      snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode','applicationName': '10kflaws-72', 'securityToolId' : '080087e19384ce502220f6db5cba10bf'}"
+	     // snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode','applicationName': '10kflaws-72', 'securityToolId' : '080087e19384ce502220f6db5cba10bf'}"
               sh 'mvn test'
            }
            post {
