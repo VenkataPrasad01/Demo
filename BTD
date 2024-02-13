@@ -14,6 +14,6 @@ node {
     stage('Deploy') {
         // Perform deploy steps
         echo 'Deploying...'
-        // Example: sh 'scp target/*.war
+        // Example: sh 
     }
 }
