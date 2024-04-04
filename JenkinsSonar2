@@ -63,7 +63,7 @@ stage('Deploy') {
             steps {
 		script{
 		//sh 'mvn -B package --file pom.xml'    
-                echo 'Running deploy stage' 
+                echo 'Deploying the change.... from test/waitinglogic branch' 
 	       // snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode','applicationName': '10kflaws-72', 'securityToolId' : '080087e19384ce502220f6db5cba10bf'}"
 		snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"master"}""")
 		snDevOpsPackage(name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"master"}""")
