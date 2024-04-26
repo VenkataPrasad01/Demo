@@ -18,7 +18,7 @@ pipeline {
                 "standardDeviation": 2,
               "startTime": "2023-12-14T23:31:31z",
                 "finishTime": "2023-12-14T23:40:32z",
-                "buildNumber": $(Build.BuildNumber),
+                "buildNumber": env.BUILD_NUMBER,,
                 "stageName": "Test API Job",
                 "pipelineName": "TEST-CI-PIPELINE"
                     ]
