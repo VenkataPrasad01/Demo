@@ -71,16 +71,7 @@ pipeline {
                     echo "Change ID: ${changeId}"
                     
                     // Call the second API to post attachment
-                    def xmlData = '<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid Name="MainGrid">
-        <StackPanel Name="StackPanel1">
-            <Button Name="Button1">First Button</Button>
-            <Button Name="Button2">Second Button</Button>
-        </StackPanel>
-    </Grid>
-</Window>'
+                    def xmlData = '<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"Title="MainWindow" Height="350" Width="525"><Grid Name="MainGrid"><StackPanel Name="StackPanel1"><Button Name="Button1">First Button</Button><Button Name="Button2">Second Button</Button></StackPanel></Grid></Window>'
                     def AUTH2 = 'Basic YWJlbC50dXRlcjpUZXN0aW5nMSE='
                     sh(script: "curl -X POST -H 'Authorization: ${AUTH2}' -H 'Content-Type: application/xml' -d '${xmlData}' 'https://venkata7.service-now.com/api/now/attachment/file?table_name=change_request&table_sys_id=${changeId}&file_name=test10111.xml'", returnStdout: true).trim()
                 }
