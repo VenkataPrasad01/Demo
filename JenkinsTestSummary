@@ -1,0 +1,80 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('POST API Call') {
+            steps {
+                script {
+                    def apiUrl = 'https://empkiranv01.service-now.com/api/sn_devops/v1/devops/tool/test?toolId=6709162cc3bd0e109b11243599013152&testType=Smoke'
+                    def requestBody = [
+                        name: "Smoke tests",
+                        duration: 0.0,
+                        passedTests: 1,
+                        failedTests: 1,
+                        skippedTests: 1,
+                        blockedTests: 1,
+                        totalTests: 4,
+                        startTime: "2023-12-14T23:31:31z",
+	                    finishTime: "2023-12-15T23:31:31z",
+                        buildNumber: env.BUILD_NUMBER,
+                        stageName: "POST API Call",
+                        pipelineName: "TestPipelineKL"
+                    ]
+                    
+                    def auth = "ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh" // devops.integration.user:<password> in base64 encoded.
+                    def authHeader = "Basic " + auth
+                    
+                    def response = httpRequest(
+                        contentType: 'APPLICATION_JSON',
+                        httpMode: 'POST',
+                        requestBody: groovy.json.JsonOutput.toJson(requestBody),
+                        url: apiUrl,
+                        customHeaders: [[name: 'Authorization', value: authHeader]]
+                    )
+                    
+                    if (response.status == 200 || response.status == 201) {
+                        echo "API call successful!"
+                        echo "Response: ${response.content}"
+                    } else {
+                        error "API call failed with status ${response.status}"
+                    }
+                }
+            }
+        }
+        stage('UAT deploy') {
+                    steps {
+                        script {
+                            def chg_output = snDevOpsChange()
+                            def changeRequestNumber = snDevOpsGetChangeNumber(changeDetails: """{"build_number":"${env.BUILD_NUMBER}", "pipeline_name": "TestPipelineKL", "stage_name": "UAT deploy"}""")
+                            echo "${changeRequestNumber}"
+                            echo "Output of snDevOpsChange(): ${chg_output}"
+                    }
+                }
+        }
+        stage('Example') {
+            steps {
+                script {
+                    def API_URL = 'https://empkiranv01.service-now.com/api/sn_devops/devops/orchestration/changeInfo?pipelineName=TestPipelineKL&toolId=6709162cc3bd0e109b11243599013152&buildNumber=' + env.BUILD_NUMBER + '&stageName=UAT%20deploy'
+                    def AUTH = 'Basic ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh'
+                    // Call the API
+                    def response = sh(script: "curl -X GET -H 'Authorization: ${AUTH}' -H 'Content-Type: application/json' '${API_URL}'", returnStdout: true).trim()
+                    echo "Response: ${response}"
+                    
+                    // Store the JSON response into a variable
+                    def slurper = new groovy.json.JsonSlurper()
+                    def jsonResponse = slurper.parseText(response)
+                    echo "Stored JSON Response: ${jsonResponse}"
+                    
+                    // Store the specific field value from JSON response into a variable
+                    def changeId = jsonResponse.result.sys_id
+                    echo "Change ID: ${changeId}"
+                    
+                    // Call the second API to post attachment
+                    def xmlData = '<root><name>john2</name><age>34</age></root>'
+                    def AUTH2 = 'Basic ZGV2b3BzLnN5c3RlbTpUZXN0aW5nMSE='
+                    sh(script: "curl -X POST -H 'Authorization: ${AUTH2}' -H 'Content-Type: application/xml' -d '${xmlData}' 'https://empkiranv01.service-now.com/api/now/attachment/file?table_name=change_request&table_sys_id=${changeId}&file_name=test10111.xml'", returnStdout: true).trim()
+                }
+            }
+        }
+    }
+}
