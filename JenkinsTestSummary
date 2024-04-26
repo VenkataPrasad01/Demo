@@ -7,21 +7,20 @@ pipeline {
                 script {
                     def apiUrl = 'https://venkata7.service-now.com/api/sn_devops/v1/devops/tool/test?toolId=4d8e12a9c375c250c95605bdc0013114&testType=Load'
                     def requestBody = [
-                        name: "Load Testing Jenkins",
-			maximumVirtualUsers : 150,
-			throughput: "5/min",
-                        duration: 0.0,
-                        passedTests: 1,
-                        failedTests: 1,
-                        skippedTests: 1,
-                        blockedTests: 1,
-                        totalTests: 4,
-                        startTime: "2023-12-14T23:31:31z",
-	                    finishTime: "2023-12-15T23:31:31z",
-                        buildNumber: env.BUILD_NUMBER,
-			testType: "Performance",
-                        stageName: "POST API Call",
-                        pipelineName: "Venkata Pipeline"
+                        "name": "Performance test summary G Venkata",
+                "duration": 0,
+                "maximumVirtualUsers": 10,
+                "throughput": "5/min",
+                "maximumTime": 10000,
+                "minimumTime": 5000,
+                "averageTime": 7000,
+                "ninetyPercent": 8000,
+                "standardDeviation": 2,
+              "startTime": "2023-12-14T23:31:31z",
+                "finishTime": "2023-12-14T23:40:32z",
+                "buildNumber": $(Build.BuildNumber),
+                "stageName": "Test API Job",
+                "pipelineName": "TEST-CI-PIPELINE"
                     ]
                     
                     def auth = "ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh" // devops.integration.user:<password> in base64 encoded.
