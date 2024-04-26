@@ -19,8 +19,8 @@ pipeline {
               "startTime": "2023-12-14T23:31:31z",
                 "finishTime": "2023-12-14T23:40:32z",
                 "buildNumber": env.BUILD_NUMBER,,
-                "stageName": "Test API Job",
-                "pipelineName": "TEST-CI-PIPELINE"
+                "stageName": "POST API Call",
+                "pipelineName": "Venkata Pipeline"
                     ]
                     
                     def auth = "ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh" // devops.integration.user:<password> in base64 encoded.
