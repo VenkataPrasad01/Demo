@@ -5,7 +5,7 @@ pipeline {
         stage('POST API Call') {
             steps {
                 script {
-                    def apiUrl = 'https://venkata7.service-now.com/api/sn_devops/v1/devops/tool/test?toolId=4d8e12a9c375c250c95605bdc0013114&testType=User%20Acceptance'
+                    def apiUrl = 'https://venkata7.service-now.com/api/sn_devops/v1/devops/tool/test?toolId=4d8e12a9c375c250c95605bdc0013114&testType=UnitTest'
                     def requestBody = [
                         name: "User Acceptance tests",
                         duration: 0.0,
@@ -17,7 +17,7 @@ pipeline {
                         startTime: "2023-12-14T23:31:31z",
 	                    finishTime: "2023-12-15T23:31:31z",
                         buildNumber: env.BUILD_NUMBER,
-			testType: "Functional",
+			testType: "Unit",
                         stageName: "POST API Call",
                         pipelineName: "Venkata Pipeline"
                     ]
@@ -71,7 +71,73 @@ pipeline {
                     echo "Change ID: ${changeId}"
                     
                     // Call the second API to post attachment
-                    def xmlData = '<root><name>john2</name><age>34</age></root>'
+                    def xmlData = '<xml>
+<sys_user>
+<accumulated_roles/>
+<active>true</active>
+<avatar/>
+<building/>
+<calendar_integration>1</calendar_integration>
+<city/>
+<company/>
+<cost_center/>
+<country/>
+<date_format/>
+<default_perspective/>
+<department/>
+<edu_status>faculty</edu_status>
+<email/>
+<employee_number/>
+<enable_multifactor_authn>false</enable_multifactor_authn>
+<failed_attempts>0</failed_attempts>
+<federated_id/>
+<first_name>DevOps</first_name>
+<gender/>
+<hashed_user_id>d0d1de80fad3b49b4c7f20787be9c63706387ddc6419e14eba6f8ba572348643</hashed_user_id>
+<home_phone/>
+<internal_integration_user>false</internal_integration_user>
+<introduction/>
+<last_login/>
+<last_login_device/>
+<last_login_time/>
+<last_name>System</last_name>
+<last_password/>
+<ldap_server/>
+<location/>
+<locked_out>false</locked_out>
+<manager/>
+<middle_name/>
+<mobile_phone/>
+<name>DevOps System</name>
+<notification>2</notification>
+<password_needs_reset>false</password_needs_reset>
+<phone/>
+<photo/>
+<preferred_language/>
+<roles/>
+<schedule/>
+<source/>
+<state/>
+<street/>
+<sys_class_name>sys_user</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2019-02-14 22:36:25</sys_created_on>
+<sys_domain>global</sys_domain>
+<sys_domain_path>/</sys_domain_path>
+<sys_id>a0e11bb23ba32300b200655593efc491</sys_id>
+<sys_mod_count>3</sys_mod_count>
+<sys_updated_by>guest</sys_updated_by>
+<sys_updated_on>2024-04-26 10:53:02</sys_updated_on>
+<time_format/>
+<time_zone/>
+<title/>
+<user_name>devops.system</user_name>
+<user_password>$s$qkq97jBJTtjNmP8W/zmIZdgx8T4onTq1T73Wu/7fN/k=$40AOqSW0SZZVgLonVsguGlJeSnUba9TrPwmFI+bWUoQ=</user_password>
+<vip>false</vip>
+<web_service_access_only>false</web_service_access_only>
+<zip/>
+</sys_user>
+</xml>'
                     def AUTH2 = 'Basic YWJlbC50dXRlcjpUZXN0aW5nMSE='
                     sh(script: "curl -X POST -H 'Authorization: ${AUTH2}' -H 'Content-Type: application/xml' -d '${xmlData}' 'https://venkata7.service-now.com/api/now/attachment/file?table_name=change_request&table_sys_id=${changeId}&file_name=test10111.xml'", returnStdout: true).trim()
                 }
