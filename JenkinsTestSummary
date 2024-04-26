@@ -46,7 +46,7 @@ pipeline {
                     steps {
                         script {
                             def chg_output = snDevOpsChange()
-                            def changeRequestNumber = snDevOpsGetChangeNumber(changeDetails: """{"build_number":"${env.BUILD_NUMBER}", "pipeline_name": "Venkata Pipeline", "stage_name": "UAT deploy"}""")
+                            def changeRequestNumber = snDevOpsGetChangeNumber(changeDetails: """{"build_number":"${env.BUILD_NUMBER}", "pipeline_name": "Venkata%20Pipeline", "stage_name": "UAT deploy"}""")
                             echo "${changeRequestNumber}"
                             echo "Output of snDevOpsChange(): ${chg_output}"
                     }
