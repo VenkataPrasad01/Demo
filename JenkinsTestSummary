@@ -55,7 +55,7 @@ pipeline {
         stage('Example') {
             steps {
                 script {
-                    def API_URL = 'https://venkata7.service-now.com/api/sn_devops/devops/orchestration/changeInfo?pipelineName=Venkata%20Pipeline&toolId=6709162cc3bd0e109b11243599013152&buildNumber=' + env.BUILD_NUMBER + '&stageName=UAT%20deploy'
+                    def API_URL = 'https://venkata7.service-now.com/api/sn_devops/devops/orchestration/changeInfo?pipelineName=Venkata%20Pipeline&toolId=4d8e12a9c375c250c95605bdc0013114&buildNumber=' + env.BUILD_NUMBER + '&stageName=UAT%20deploy'
                     def AUTH = 'Basic ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh'
                     // Call the API
                     def response = sh(script: "curl -X GET -H 'Authorization: ${AUTH}' -H 'Content-Type: application/json' '${API_URL}'", returnStdout: true).trim()
