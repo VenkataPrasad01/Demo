@@ -9,6 +9,7 @@ pipeline {
                     def requestBody = [
                         name: "Load Testing Jenkins",
 			maximumVirtualUsers : 150,
+			throughput: "5/min",
                         duration: 0.0,
                         passedTests: 1,
                         failedTests: 1,
