@@ -71,7 +71,7 @@ pipeline {
                     echo "Change ID: ${changeId}"
                     
                     // Call the second API to post attachment
-                    def xmlData = '<xml>
+                    def xmlData = '
 <sys_user>
 <accumulated_roles/>
 <active>true</active>
@@ -136,8 +136,7 @@ pipeline {
 <vip>false</vip>
 <web_service_access_only>false</web_service_access_only>
 <zip/>
-</sys_user>
-</xml>'
+</sys_user>'
                     def AUTH2 = 'Basic YWJlbC50dXRlcjpUZXN0aW5nMSE='
                     sh(script: "curl -X POST -H 'Authorization: ${AUTH2}' -H 'Content-Type: application/xml' -d '${xmlData}' 'https://venkata7.service-now.com/api/now/attachment/file?table_name=change_request&table_sys_id=${changeId}&file_name=test10111.xml'", returnStdout: true).trim()
                 }
