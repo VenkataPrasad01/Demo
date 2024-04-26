@@ -5,7 +5,7 @@ pipeline {
         stage('POST API Call') {
             steps {
                 script {
-                    def apiUrl = 'https://venkata7.service-now.com/api/sn_devops/v1/devops/tool/test?toolId=4d8e12a9c375c250c95605bdc0013114&testType=User Acceptance'
+                    def apiUrl = 'https://venkata7.service-now.com/api/sn_devops/v1/devops/tool/test?toolId=4d8e12a9c375c250c95605bdc0013114&testType=User%20Acceptance'
                     def requestBody = [
                         name: "User Acceptance tests",
                         duration: 0.0,
