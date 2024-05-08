@@ -376,6 +376,30 @@ pipeline {
               server.publishBuildInfo buildInfo   
         }}}
 	}
+
+ stage('Example18') {
+
+            steps {
+                echo 'Hello World'
+            writeFile file: "/tmp/app-devops-jenkins17-${env.BUILD_NUMBER}-SNAPSHOT.jar", text: 'This is a test'
+    
+            }
+            
+            post { 
+                always { 
+        script { 
+                 def server = Artifactory.server 'JFrog1'
+                 def uploadSpec = """{
+                    "files": [{
+                       "pattern": "/tmp/app-devops-jenkins17-${env.BUILD_NUMBER}-SNAPSHOT.jar",
+                       "target": "felipe-repo/${env.BUILD_NUMBER}/"
+                    }]
+                 }"""
+
+              def buildInfo = server.upload(uploadSpec) 
+              server.publishBuildInfo buildInfo   
+        }}}
+	}
       stage('Deploy') {
                  steps {
                     
