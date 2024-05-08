@@ -400,6 +400,171 @@ pipeline {
               server.publishBuildInfo buildInfo   
         }}}
 	}
+ stage('Example19') {
+
+            steps {
+                echo 'Hello World'
+            writeFile file: "/tmp/app-devops-jenkins19-${env.BUILD_NUMBER}-SNAPSHOT.jar", text: 'This is a test'
+    
+            }
+            
+            post { 
+                always { 
+        script { 
+                 def server = Artifactory.server 'JFrog1'
+                 def uploadSpec = """{
+                    "files": [{
+                       "pattern": "/tmp/app-devops-jenkins19-${env.BUILD_NUMBER}-SNAPSHOT.jar",
+                       "target": "felipe-repo/${env.BUILD_NUMBER}/"
+                    }]
+                 }"""
+
+              def buildInfo = server.upload(uploadSpec) 
+              server.publishBuildInfo buildInfo   
+        }}}
+	}
+ stage('Example20') {
+
+            steps {
+                echo 'Hello World'
+            writeFile file: "/tmp/app-devops-jenkins20-${env.BUILD_NUMBER}-SNAPSHOT.jar", text: 'This is a test'
+    
+            }
+            
+            post { 
+                always { 
+        script { 
+                 def server = Artifactory.server 'JFrog1'
+                 def uploadSpec = """{
+                    "files": [{
+                       "pattern": "/tmp/app-devops-jenkins20-${env.BUILD_NUMBER}-SNAPSHOT.jar",
+                       "target": "felipe-repo/${env.BUILD_NUMBER}/"
+                    }]
+                 }"""
+
+              def buildInfo = server.upload(uploadSpec) 
+              server.publishBuildInfo buildInfo   
+        }}}
+	}
+
+ stage('Example21') {
+
+            steps {
+                echo 'Hello World'
+            writeFile file: "/tmp/app-devops-jenkins21-${env.BUILD_NUMBER}-SNAPSHOT.jar", text: 'This is a test'
+    
+            }
+            
+            post { 
+                always { 
+        script { 
+                 def server = Artifactory.server 'JFrog1'
+                 def uploadSpec = """{
+                    "files": [{
+                       "pattern": "/tmp/app-devops-jenkins21-${env.BUILD_NUMBER}-SNAPSHOT.jar",
+                       "target": "felipe-repo/${env.BUILD_NUMBER}/"
+                    }]
+                 }"""
+
+              def buildInfo = server.upload(uploadSpec) 
+              server.publishBuildInfo buildInfo   
+        }}}
+	}
+ stage('Example22') {
+
+            steps {
+                echo 'Hello World'
+            writeFile file: "/tmp/app-devops-jenkins22-${env.BUILD_NUMBER}-SNAPSHOT.jar", text: 'This is a test'
+    
+            }
+            
+            post { 
+                always { 
+        script { 
+                 def server = Artifactory.server 'JFrog1'
+                 def uploadSpec = """{
+                    "files": [{
+                       "pattern": "/tmp/app-devops-jenkins22-${env.BUILD_NUMBER}-SNAPSHOT.jar",
+                       "target": "felipe-repo/${env.BUILD_NUMBER}/"
+                    }]
+                 }"""
+
+              def buildInfo = server.upload(uploadSpec) 
+              server.publishBuildInfo buildInfo   
+        }}}
+	}
+
+ stage('Example23') {
+
+            steps {
+                echo 'Hello World'
+            writeFile file: "/tmp/app-devops-jenkins23-${env.BUILD_NUMBER}-SNAPSHOT.jar", text: 'This is a test'
+    
+            }
+            
+            post { 
+                always { 
+        script { 
+                 def server = Artifactory.server 'JFrog1'
+                 def uploadSpec = """{
+                    "files": [{
+                       "pattern": "/tmp/app-devops-jenkins23-${env.BUILD_NUMBER}-SNAPSHOT.jar",
+                       "target": "felipe-repo/${env.BUILD_NUMBER}/"
+                    }]
+                 }"""
+
+              def buildInfo = server.upload(uploadSpec) 
+              server.publishBuildInfo buildInfo   
+        }}}
+	}
+
+ stage('Example24') {
+
+            steps {
+                echo 'Hello World'
+            writeFile file: "/tmp/app-devops-jenkins24-${env.BUILD_NUMBER}-SNAPSHOT.jar", text: 'This is a test'
+    
+            }
+            
+            post { 
+                always { 
+        script { 
+                 def server = Artifactory.server 'JFrog1'
+                 def uploadSpec = """{
+                    "files": [{
+                       "pattern": "/tmp/app-devops-jenkins24-${env.BUILD_NUMBER}-SNAPSHOT.jar",
+                       "target": "felipe-repo/${env.BUILD_NUMBER}/"
+                    }]
+                 }"""
+
+              def buildInfo = server.upload(uploadSpec) 
+              server.publishBuildInfo buildInfo   
+        }}}
+	}
+
+ stage('Example25') {
+
+            steps {
+                echo 'Hello World'
+            writeFile file: "/tmp/app-devops-jenkins25-${env.BUILD_NUMBER}-SNAPSHOT.jar", text: 'This is a test'
+    
+            }
+            
+            post { 
+                always { 
+        script { 
+                 def server = Artifactory.server 'JFrog1'
+                 def uploadSpec = """{
+                    "files": [{
+                       "pattern": "/tmp/app-devops-jenkins25-${env.BUILD_NUMBER}-SNAPSHOT.jar",
+                       "target": "felipe-repo/${env.BUILD_NUMBER}/"
+                    }]
+                 }"""
+
+              def buildInfo = server.upload(uploadSpec) 
+              server.publishBuildInfo buildInfo   
+        }}}
+	}
       stage('Deploy') {
                  steps {
                     
