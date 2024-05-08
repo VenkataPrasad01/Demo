@@ -30,7 +30,7 @@ pipeline {
             post { 
                 always { 
         script { 
-                 def server = Artifactory.server 'JFROGRIYA'
+                 def server = Artifactory.server 'JFrog1'
                  def uploadSpec = """{
                     "files": [{
                        "pattern": "/tmp/app-devops-jenkins1-${env.BUILD_NUMBER}-SNAPSHOT.jar",
@@ -52,7 +52,7 @@ pipeline {
             post { 
                 always { 
         script { 
-                 def server = Artifactory.server 'JFROGRIYA'
+                 def server = Artifactory.server 'JFrog1'
                  def uploadSpec = """{
                     "files": [{
                        "pattern": "/tmp/app-devops-jenkins2-${env.BUILD_NUMBER}-SNAPSHOT.jar",
@@ -74,7 +74,7 @@ pipeline {
             post { 
                 always { 
         script { 
-                 def server = Artifactory.server 'JFROGRIYA'
+                 def server = Artifactory.server 'JFrog1'
                  def uploadSpec = """{
                     "files": [{
                        "pattern": "/tmp/app-devops-jenkins3-${env.BUILD_NUMBER}-SNAPSHOT.jar",
@@ -96,7 +96,7 @@ pipeline {
             post { 
                 always { 
         script { 
-                 def server = Artifactory.server 'JFROGRIYA'
+                 def server = Artifactory.server 'JFrog1'
                  def uploadSpec = """{
                     "files": [{
                        "pattern": "/tmp/app-devops-jenkins4-${env.BUILD_NUMBER}-SNAPSHOT.jar",
@@ -118,7 +118,7 @@ pipeline {
             post { 
                 always { 
         script { 
-                 def server = Artifactory.server 'JFROGRIYA'
+                 def server = Artifactory.server 'JFrog1'
                  def uploadSpec = """{
                     "files": [{
                        "pattern": "/tmp/app-devops-jenkins5-${env.BUILD_NUMBER}-SNAPSHOT.jar",
