@@ -8,9 +8,6 @@ def pkgName = "devops-snow-build-prasad_pkg_${env.BUILD_NUMBER}"
 
 pipeline {
   agent any
-  tools {
-       maven 'Maven'
-   }
  
   stages {
        stage('Build') {
