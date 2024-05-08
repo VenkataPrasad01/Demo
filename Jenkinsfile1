@@ -10,13 +10,7 @@ pipeline {
   agent any
  
   stages {
-       stage('Build') {
-           steps {
-              
-              sh 'mvn -B -DskipTests clean compile'
 
-           }
-       }
        stage('Example1') {
             steps {
                 echo 'Hello World'
