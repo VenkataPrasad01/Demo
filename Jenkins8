@@ -17,7 +17,7 @@ pipeline {
   stages {
        stage('Build !@') {
            steps {
-              
+              echo "Building"  
              // sh 'mvn -B -DskipTests clean compile'
 	     // snDevOpsChange(ignoreErrors:false)
 
@@ -61,6 +61,7 @@ pipeline {
 	withSonarQubeEnv('sonarQube_local'){
 	   if(fileExists("sonar-project.properties")) {
 			sh '${SCANNER_HOME}/bin/sonar-scanner'
+			echo "Building" 
 		}
 	}
 	//timeout(time: 1, unit: 'MINUTES') {
