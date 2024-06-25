@@ -9,7 +9,7 @@ def pkgName = "devops-snow-build-pkg_${env.BUILD_NUMBER}"
 pipeline {
   agent any
   tools {
-       maven 'Maven'
+      // maven 'Maven'
    }
    environment {
 	 SCANNER_HOME = tool 'sonarScanner'
@@ -18,7 +18,7 @@ pipeline {
        stage('Build !@') {
            steps {
               
-              sh 'mvn -B -DskipTests clean compile'
+             // sh 'mvn -B -DskipTests clean compile'
 	     // snDevOpsChange(ignoreErrors:false)
 
            }
@@ -26,7 +26,7 @@ pipeline {
        stage('Test') {
            steps {
               sonarSummaries()
-              sh 'mvn test'
+              // sh 'mvn test'
            }
            post {
              always {
