@@ -40,12 +40,6 @@ pipeline {
                      // sonarSummaries()
                    // snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode','applicationName': 'PetStoreAPI-Github', 'securityToolId' : '270f932193e4b5101fb93cb19dba1005'}"
                     snDevOpsChange()
-		    script{
-                    changeNumber = snDevOpsGetChangeNumber()
-                    echo '>> Deploy Stage -----'
-                    sh "echo ${changeNumber}"
-                  
-                  }
                   
                   }
                     
