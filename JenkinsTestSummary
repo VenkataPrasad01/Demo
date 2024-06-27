@@ -1,0 +1,82 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('POST API Call') {
+            steps {
+                script {
+                    def apiUrl = 'https://venkata7.service-now.com/api/sn_devops/v1/devops/tool/test?toolId=4d8e12a9c375c250c95605bdc0013114&testType=Load'
+                    def requestBody = [
+                        "name": "Performance test summary G Venkata",
+                "duration": 0,
+                "maximumVirtualUsers": 10,
+                "throughput": "5/min",
+                "maximumTime": 10000,
+                "minimumTime": 5000,
+                "averageTime": 7000,
+                "ninetyPercent": 8000,
+                "standardDeviation": 2,
+              "startTime": "2023-12-14T23:31:31z",
+                "finishTime": "2023-12-14T23:40:32z",
+                "buildNumber": env.BUILD_NUMBER,,
+                "stageName": "POST API Call",
+                "pipelineName": "Venkata Pipeline"
+                    ]
+                    
+                    def auth = "ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh" // devops.integration.user:<password> in base64 encoded.
+                    def authHeader = "Basic " + auth
+                    
+                    def response = httpRequest(
+                        contentType: 'APPLICATION_JSON',
+                        httpMode: 'POST',
+                        requestBody: groovy.json.JsonOutput.toJson(requestBody),
+                        url: apiUrl,
+                        customHeaders: [[name: 'Authorization', value: authHeader]]
+                    )
+                    
+                    if (response.status == 200 || response.status == 201) {
+                        echo "API call successful!"
+                        echo "Response: ${response.content}"
+                    } else {
+                        error "API call failed with status ${response.status}"
+                    }
+                }
+            }
+        }
+        stage('UAT deploy') {
+                    steps {
+                        script {
+                            def chg_output = snDevOpsChange()
+                            def changeRequestNumber = snDevOpsGetChangeNumber(changeDetails: """{"build_number":"${env.BUILD_NUMBER}", "pipeline_name": "Venkata Pipeline", "stage_name": "UAT deploy"}""")
+                            echo "${changeRequestNumber}"
+                            echo "Output of snDevOpsChange(): ${chg_output}"
+                    }
+                }
+        }
+        stage('Example') {
+            steps {
+                script {
+                    def API_URL = 'https://venkata7.service-now.com/api/sn_devops/devops/orchestration/changeInfo?pipelineName=Venkata%20Pipeline&toolId=4d8e12a9c375c250c95605bdc0013114&buildNumber=' + env.BUILD_NUMBER + '&stageName=UAT%20deploy'
+                    def AUTH = 'Basic ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh'
+                    // Call the API
+                    def response = sh(script: "curl -X GET -H 'Authorization: ${AUTH}' -H 'Content-Type: application/json' '${API_URL}'", returnStdout: true).trim()
+                    echo "Response: ${response}"
+                    
+                    // Store the JSON response into a variable
+                    def slurper = new groovy.json.JsonSlurper()
+                    def jsonResponse = slurper.parseText(response)
+                    echo "Stored JSON Response: ${jsonResponse}"
+                    
+                    // Store the specific field value from JSON response into a variable
+                    def changeId = jsonResponse.result.sys_id
+                    echo "Change ID: ${changeId}"
+                    
+                    // Call the second API to post attachment
+                    def xmlData = '<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"Title="MainWindow" Height="350" Width="525"><Grid Name="MainGrid"><StackPanel Name="StackPanel1"><Button Name="Button1">First Button</Button><Button Name="Button2">Second Button</Button></StackPanel></Grid></Window>'
+                    def AUTH2 = 'Basic YWJlbC50dXRlcjpUZXN0aW5nMSE='
+                    sh(script: "curl -X POST -H 'Authorization: ${AUTH2}' -H 'Content-Type: application/xml' -d '${xmlData}' 'https://venkata7.service-now.com/api/now/attachment/file?table_name=change_request&table_sys_id=${changeId}&file_name=test10111.xml'", returnStdout: true).trim()
+                }
+            }
+        }
+    }
+}
