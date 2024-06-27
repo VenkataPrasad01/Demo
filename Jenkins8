@@ -28,11 +28,6 @@ pipeline {
               sonarSummaries()
               // sh 'mvn test'
            }
-           post {
-             always {
-                junit "**/target/surefire-reports/*.xml"
-             }
-           }
        }
       stage('Deploy Stage') {
                  steps {
